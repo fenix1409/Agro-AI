@@ -1,7 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
+// import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
 const geist = Geist({ subsets: ["latin"] })
@@ -11,7 +11,6 @@ const geistMono = Geist_Mono({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "AgroAI - Agrobank Intelligent Farming",
   description: "AI-powered farming advisory platform by Agrobank for Uzbekistan farmers",
-  generator: "v0.app",
   icons: {
     icon: [
       {
@@ -40,7 +39,7 @@ export default function RootLayout({
     <html lang="uz" className="scroll-smooth">
       <body className={`${geist.className} font-sans antialiased`}>
         {children}
-        <Analytics />
+        {/* <Analytics /> */}
       </body>
     </html>
   )
