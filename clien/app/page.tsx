@@ -1,15 +1,32 @@
-"use client"
+"use server"
 
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { Sidebar } from "@/components/sidebar"
 import { KPISection } from "@/components/kpi-section"
 import { AIAdvisorSection } from "@/components/ai-advisor-section"
+import { auth } from "@/lib/better-auth/auth"
+import { headers } from "next/headers"
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth.api.getSession({ headers: await headers() });
+
+  const user = (() => {
+    const s = session?.user;
+    if (!s) return undefined;
+    return {
+      id: s.id,
+      name: s.name,
+      email: s.email,
+    };
+  })();
   return (
     <>
-      <Header />
+      {user ? (
+        <Header user={user} />
+      ) : (
+        <Header />
+      )}
       <HeroSection />
 
       <div className="bg-gray-100 min-h-screen pb-20 border-t border-gray-200">
